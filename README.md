@@ -1,7 +1,8 @@
 geolinks
 ========
 
-Utilities to deal with geospatial links
+Utilities to deal with geospatial links.  Working implementation
+of the Cat-Interop work at https://github.com/OSGeo/Cat-Interop
 
 Install
 -------
