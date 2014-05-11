@@ -11,7 +11,6 @@ Install
 
 ```bash
 pip install geolinks
-
 ```
 
 Use
