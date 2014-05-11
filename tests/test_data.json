@@ -1,0 +1,22 @@
+{
+    "test_data": [
+        {"link": "http://host/wms?service=WMS", "expected": "OGC:WMS"},
+        {"link": "http://host/ows?service=WFS", "expected": "OGC:WFS"},
+        {"link": "http://host/ows?service=WCS", "expected": "OGC:WCS"},
+        {"link": "http://host/ows?service=WPS", "expected": "OGC:WPS"},
+        {"link": "http://host/csw?service=CSW", "expected": "OGC:CSW"},
+        {"link": "http://host/data/roads.kmz", "expected": "OGC:KML"},
+        {"link": "http://host/data/roads.kml", "expected": "OGC:KML"},
+        {"link": "http://host/data/data.html", "expected": "WWW:LINK"},
+        {"link": "http://host/download/admin.mpk", "expected": "ESRI:MPK"},
+        {"link": "http://host/data.7z", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/data.tgz", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/data/data.zip", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/data/data.gz", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/data/file.gml", "expected": "OGC:GML"},
+        {"link": "http://host/data/file.gml.gz", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/data.tar.gz", "expected": "WWW:DOWNLOAD"},
+        {"link": "http://host/sos?service=SOS&request=GetObservation", "expected": "OGC:SOS"},
+        {"link": "http://host/sos?service=SOS&request=GetObservation", "expected": "OGC:SOS"}
+    ]
+}
