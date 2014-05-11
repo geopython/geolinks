@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geopython/geolinks.png)](https://travis-ci.org/geopython/geolinks)
+
 geolinks
 ========
 
