@@ -17,7 +17,7 @@ Use
 ---
 
 ```python
->>> from geolinks.link_types import sniff_link
+>>> from geolinks.links import sniff_link
 >>> sniff_link('http://host/wms?service=WMS')
 'OGC:WMS'
 >>> sniff_link('http://host/wms?service=WPS')
