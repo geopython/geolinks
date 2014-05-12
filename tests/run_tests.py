@@ -29,7 +29,7 @@
 
 import unittest
 import json
-from geolinks.link_types import sniff_link
+from geolinks.links import sniff_link
 
 
 class GeolinksTest(unittest.TestCase):
