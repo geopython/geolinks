@@ -36,7 +36,8 @@ class GeolinksTest(unittest.TestCase):
     """Test suite for package Foo"""
     def setUp(self):
         """setup test fixtures, etc."""
-        self.test_data = json.load(open('test_data.json'))
+        with open('test_data.json') as f:
+            self.test_data = json.load(f)
 
     def tearDown(self):
         """return to pristine state"""
