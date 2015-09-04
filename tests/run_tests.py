@@ -36,7 +36,8 @@ class GeolinksTest(unittest.TestCase):
     """Test suite for package Foo"""
     def setUp(self):
         """setup test fixtures, etc."""
-        self.test_data = json.load(open('test_data.json'))
+        with open('test_data.json') as f:
+            self.test_data = json.load(f)
 
     def tearDown(self):
         """return to pristine state"""
@@ -46,9 +47,9 @@ class GeolinksTest(unittest.TestCase):
         """simple link type tests"""
 
         for test in self.test_data['test_data']:
-            self.assertEquals(sniff_link(test['link']), test['expected'],
-                              'Expected %s and %s to be equal' %
-                              (test['link'], test['expected']))
+            self.assertEqual(sniff_link(test['link']), test['expected'],
+                             'Expected %s and %s to be equal' %
+                             (test['link'], test['expected']))
 
 if __name__ == '__main__':
     unittest.main()
