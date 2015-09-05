@@ -15,4 +15,4 @@ script:
   - python run_tests.py
   - pep8 run_tests.py
   - cd ../geolinks
-  - pep8 links.py
+  - pep8 __init__.py
