@@ -2,7 +2,7 @@
 #
 # Authors: Tom Kralidis <tomkralidis@gmail.com>
 #
-# Copyright (c) 2014 Tom Kralidis
+# Copyright (c) 2019 Tom Kralidis
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -27,7 +27,8 @@
 #
 # =================================================================
 
-from distutils.core import setup
+from setuptools import find_packages, setup
+
 from geolinks import __version__ as version
 
 setup(
@@ -35,6 +36,7 @@ setup(
     version=version,
     description='Utilities to deal with geospatial links',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     license='MIT',
     platforms='all',
     keywords='links geo protocol url href',
@@ -43,7 +45,7 @@ setup(
     maintainer='Tom Kralidis',
     maintainer_email='tomkralidis@gmail.com',
     url='https://github.com/geopython/geolinks',
-    packages=['geolinks'],
+    packages=find_packages(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -52,12 +54,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Scientific/Engineering :: GIS',
     ]
 )
