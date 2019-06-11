@@ -2,7 +2,7 @@
 #
 # Authors: Tom Kralidis <tomkralidis@gmail.com>
 #
-# Copyright (c) 2014 Tom Kralidis
+# Copyright (c) 2019 Tom Kralidis
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -50,6 +50,7 @@ class GeolinksTest(unittest.TestCase):
             self.assertEqual(sniff_link(test['link']), test['expected'],
                              'Expected %s and %s to be equal' %
                              (test['link'], test['expected']))
+
 
 if __name__ == '__main__':
     unittest.main()
