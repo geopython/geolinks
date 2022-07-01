@@ -158,7 +158,7 @@ def link():
 @click.argument('link')
 @CLICK_OPTION_VERBOSITY
 def sniff(link, verbosity):
-    """Sniff link""
+    """Sniff link"""
 
     click.echo(f'Sniffing link: {link}')
 

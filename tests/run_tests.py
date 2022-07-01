@@ -60,7 +60,7 @@ class GeolinksTest(unittest.TestCase):
 
         for test in self.test_data['test_data']:
             self.assertEqual(sniff_link(test['link']), test['expected'],
-                             f'Expected test['link'] and test['expected'] to be equal')  # noqa
+                             f"Expected {test['link']} and {test['expected']} to be equal")  # noqa
 
 
 if __name__ == '__main__':
