@@ -1,6 +1,7 @@
 {
     "test_data": [
         {"link": "http://host/wms?service=WMS", "expected": "OGC:WMS"},
+        {"link": "https://maps.isric.org/mapserv?map=/map/bdod.map", "expected": "OGC:WMS"},
         {"link": "http://host/ows?service=WFS", "expected": "OGC:WFS"},
         {"link": "http://host/ows?service=WCS", "expected": "OGC:WCS"},
         {"link": "http://host/ows?service=WPS", "expected": "OGC:WPS"},

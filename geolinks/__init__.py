@@ -31,6 +31,16 @@ import logging
 import sys
 
 import click
+from owslib.wms import WebMapService as WMS
+from owslib.wfs import WebFeatureService as WFS
+from owslib.ogcapi.features import Features as OAPIF
+from owslib.ogcapi.coverages import Coverages as OAPIC
+from owslib.ogcapi.records import Records as OAPIR
+from owslib.wcs import WebCoverageService as WCS
+from owslib.csw import CatalogueServiceWeb as CSW
+from owslib.wps import WebProcessingService as WPS
+from owslib.sos import SensorObservationService as SOS
+from owslib.wmts import WebMapTileService as WMTS
 
 LOGGER = logging.getLogger(__name__)
 
@@ -50,7 +60,6 @@ def CLICK_OPTION_VERBOSITY(f):
                         type=click.Choice(logging_options),
                         help='Verbosity',
                         callback=callback)(f)
-
 
 def inurl(needles, haystack, position='any'):
     """convenience function to make string.find return bool"""
@@ -78,7 +87,7 @@ def inurl(needles, haystack, position='any'):
     return False
 
 
-def sniff_link(url):
+def sniff_link(url, extended=False, first=True):
     """performs basic heuristics to detect what the URL is"""
 
     protocol = None
@@ -123,7 +132,106 @@ def sniff_link(url):
     elif inurl(['kml', 'kmz'], link, 'end'):
         protocol = 'OGC:KML'
     else:
-        LOGGER.info('No link type detected')
+        if (extended):
+            protocol = []
+            #for each servicetype, head out to see if it is valid
+            try: 
+                wms = WMS(link)
+                if (wms.identification.type == 'OGC:WMS'):
+                    if (first):
+                        return wms.identification.type
+                    else:
+                        protocol.append(wms.identification.type)
+            except:
+                pass # No need to log?
+            try: 
+                wmts = WMTS(link)        
+                if (wmts.identification.type == 'OGC:WMTS'):
+                    if (first):
+                        return wmts.identification.type
+                    else:
+                        protocol.append(wmts.identification.type)
+            except:
+                pass
+            try:
+                wps = WPS(link, verbose=False, skip_caps=True)
+                wps.getcapabilities()
+                if (wps.identification.type == 'OGC:WPS'):
+                    if (first):
+                        return wps.identification.type
+                    else:
+                        protocol.append(wps.identification.type)
+            except:
+                pass 
+            try:
+                wfs = WFS(link)
+                if (wfs.identification.type == 'OGC:WFS'):
+                    if (first):
+                        return wfs.identification.type
+                    else:
+                        protocol.append(wfs.identification.type)
+            except:
+                pass
+            try:
+                csw = CSW('http://geodiscover.cgdi.ca/wes/serviceManagerCSW/csw')
+                if (csw.identification.type == 'OGC:CSW'):
+                    if (first):
+                        return csw.identification.type
+                    else:
+                        protocol.append(csw.identification.type)
+            except:
+                pass
+            try:
+                wcs = WCS(link)
+                if (wcs.identification.type == 'OGC:WCS'):
+                    if (first):
+                        return wcs.identification.type
+                    else:
+                        protocol.append(wcs.identification.type)
+            except:
+                pass
+            try:
+                sos = SOS(link)
+                if (sos.identification.type == 'OGC:SOS'):
+                    if (first):
+                        return sos.identification.type
+                    else:
+                        protocol.append(sos.identification.type)
+            except:
+                pass
+            try: 
+                oapir = OAPIR(link)
+                if (oapir.conformance()):
+                    if (first):
+                        return "OGCAPI:records"
+                    else:
+                        protocol.append("OGCAPI:records")
+            except:
+                pass
+            try: 
+                oapif = OAPIF(link)
+                if (oapir.conformance()):
+                    if (first):
+                        return "OGCAPI:features"
+                    else:
+                        protocol.append("OGCAPI:features")
+            except:
+                pass
+            try: 
+                oapic = OAPIC(link)
+                if (oapir.conformance()):
+                    if (first):
+                        return "OGCAPI:coverages"
+                    else:
+                        protocol.append("OGCAPI:coverages")
+            except:
+                pass
+
+            if len(protocol) == 1:
+                protocol = protocol[0]
+
+        else:
+            LOGGER.info('No link type detected')
 
     return protocol
 
@@ -150,8 +258,10 @@ def sniff(link, verbosity):
 
     link_type = sniff_link(link)
 
-    click.echo(f'Link type: {link_type}')
-
+	if isinstance(link_type, str):
+	    click.echo(f'Link type: {link_type}')
+	else:
+		click.echo(f'Link types: {link_type.join(",")}')
 
 link.add_command(sniff)
 cli.add_command(link)
