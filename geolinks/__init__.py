@@ -29,7 +29,6 @@
 
 import logging
 import sys
-
 import click
 from owslib.wms import WebMapService as WMS
 from owslib.wfs import WebFeatureService as WFS
@@ -59,6 +58,7 @@ def CLICK_OPTION_VERBOSITY(f):
     return click.option('--verbosity', '-v',
                         type=click.Choice(logging_options),
                         help='Verbosity',
+                        default='WARNING',
                         callback=callback)(f)
 
 def inurl(needles, haystack, position='any'):
@@ -250,18 +250,24 @@ def link():
 
 @click.command()
 @click.argument('link')
+@click.option("--probe", show_default=True, default=False, help="Probe the link to evaluate its type")
+@click.option("--first", show_default=True, default=True, help="Use the first protocol identified")
 @CLICK_OPTION_VERBOSITY
-def sniff(link, verbosity):
+
+
+def sniff(link, probe=False, first=True, verbosity='WARNING'):
     """Sniff link"""
 
     click.echo(f'Sniffing link: {link}')
 
-    link_type = sniff_link(link)
+    link_type = sniff_link(link, probe, first)
 
-	if isinstance(link_type, str):
-	    click.echo(f'Link type: {link_type}')
-	else:
-		click.echo(f'Link types: {link_type.join(",")}')
+    if (not link_type):
+        click.echo(f'No type detected')
+    elif isinstance(link_type, str):
+        click.echo(f'Link type: {link_type}')
+    else:
+        click.echo(f'Link types: {", ".join(link_type)}')
 
 link.add_command(sniff)
 cli.add_command(link)

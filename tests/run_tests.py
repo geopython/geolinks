@@ -59,7 +59,7 @@ class GeolinksTest(unittest.TestCase):
         """simple link type tests"""
 
         for test in self.test_data['test_data']:
-            self.assertEqual(sniff_link(test['link'],extended=True), test['expected'],
+            self.assertEqual(sniff_link(test['link'], probe=test.get('probe',False), first=test.get('first',True)), test['expected'],
                              'Expected %s and %s to be equal' %
                              (test['link'], test['expected']))
 
