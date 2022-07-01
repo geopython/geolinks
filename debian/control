@@ -1,0 +1,20 @@
+Source: geolinks
+Section: python
+Priority: optional
+Maintainer: Tom Kralidis <tomkralidis@gmail.com>
+Uploaders: Angelos Tzotsos <gcpp.kalxas@gmail.com>
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               python3-all,
+               python3-setuptools
+Standards-Version: 4.3.0
+Vcs-Git: https://github.com/geopython/geolinks.git
+Homepage: https://github.com/geopython/geolinks
+
+Package: python3-geolinks
+Architecture: all
+Depends: ${python3:Depends},
+         python3-click,
+         ${misc:Depends}
+Description: Utilities to deal with geospatial links. Working implementation
+ of the Cat-Interop work at https://github.com/OSGeo/Cat-Interop

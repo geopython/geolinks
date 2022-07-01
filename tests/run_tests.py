@@ -2,7 +2,7 @@
 #
 # Authors: Tom Kralidis <tomkralidis@gmail.com>
 #
-# Copyright (c) 2019 Tom Kralidis
+# Copyright (c) 2022 Tom Kralidis
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -27,8 +27,10 @@
 #
 # =================================================================
 
-import unittest
 import json
+import os.path
+import unittest
+
 from geolinks import sniff_link
 
 
@@ -36,7 +38,17 @@ class GeolinksTest(unittest.TestCase):
     """Test suite for package Foo"""
     def setUp(self):
         """setup test fixtures, etc."""
-        with open('test_data.json') as f:
+
+        test_data = None
+
+        if os.path.exists('test_data.json'):
+            test_data = 'test_data.json'
+        elif os.path.exists('tests/test_data.json'):
+            test_data = 'tests/test_data.json'
+        else:
+            raise FileNotFoundError()
+
+        with open(test_data) as f:
             self.test_data = json.load(f)
 
     def tearDown(self):

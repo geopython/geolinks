@@ -2,7 +2,7 @@
 #
 # Authors: Tom Kralidis <tomkralidis@gmail.com>
 #
-# Copyright (c) 2014 Tom Kralidis
+# Copyright (c) 2022 Tom Kralidis
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -28,10 +28,28 @@
 # =================================================================
 
 import logging
+import sys
+
+import click
 
 LOGGER = logging.getLogger(__name__)
 
-__version__ = '0.2-dev'
+__version__ = '0.2.dev0'
+
+
+def CLICK_OPTION_VERBOSITY(f):
+    logging_options = ['ERROR', 'WARNING', 'INFO', 'DEBUG']
+
+    def callback(ctx, param, value):
+        if value is not None:
+            logging.basicConfig(stream=sys.stdout,
+                                level=getattr(logging, value))
+        return True
+
+    return click.option('--verbosity', '-v',
+                        type=click.Choice(logging_options),
+                        help='Verbosity',
+                        callback=callback)(f)
 
 
 def inurl(needles, haystack, position='any'):
@@ -108,3 +126,32 @@ def sniff_link(url):
         LOGGER.info('No link type detected')
 
     return protocol
+
+
+@click.group()
+@click.version_option(version=__version__)
+def cli():
+    pass
+
+
+@click.group()
+def link():
+    """Link utilities"""
+    pass
+
+
+@click.command()
+@click.argument('link')
+@CLICK_OPTION_VERBOSITY
+def sniff(link, verbosity):
+    """Sniff link"""
+
+    click.echo(f'Sniffing link: {link}')
+
+    link_type = sniff_link(link)
+
+    click.echo(f'Link type: {link_type}')
+
+
+link.add_command(sniff)
+cli.add_command(link)
