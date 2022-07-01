@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Tom Kralidis <tomkralidis@gmail.com>
 Uploaders: Angelos Tzotsos <gcpp.kalxas@gmail.com>
            Johan Van de Wauw <johan@vandewauw.be>
-Build-Depends: debhelper-compat (= 12),
+Build-Depends: debhelper (>= 12),
                dh-python,
                python3-all,
                python3-setuptools
