@@ -29,6 +29,7 @@
 
 import logging
 import sys
+from typing import Union
 
 import click
 
@@ -52,8 +53,15 @@ def CLICK_OPTION_VERBOSITY(f):
                         callback=callback)(f)
 
 
-def inurl(needles, haystack, position='any'):
-    """convenience function to make string.find return bool"""
+def inurl(needles, haystack, position='any') -> bool:
+    """
+    convenience function to find a given value in a URL
+
+    :param needles: `list` of patterns to test
+    :param haystack: value to search / detect for patterns
+
+    returns: `bool` of assessment
+    """
 
     count = 0
 
@@ -78,8 +86,14 @@ def inurl(needles, haystack, position='any'):
     return False
 
 
-def sniff_link(url):
-    """performs basic heuristics to detect what the URL is"""
+def sniff_link(url) -> Union[str, None]:
+    """
+    performs basic heuristics to detect what the URL is
+
+    :param url: `str` of URL
+
+    :returns: possible link type or `None`
+    """
 
     protocol = None
     link = url.strip()
@@ -144,7 +158,7 @@ def link():
 @click.argument('link')
 @CLICK_OPTION_VERBOSITY
 def sniff(link, verbosity):
-    """Sniff link"""
+    """Sniff link""
 
     click.echo(f'Sniffing link: {link}')
 
