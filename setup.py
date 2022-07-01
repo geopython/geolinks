@@ -86,6 +86,11 @@ setup(
     maintainer_email='tomkralidis@gmail.com',
     url='https://github.com/geopython/geolinks',
     packages=find_packages(),
+    entry_points={
+        'console_scripts': [
+            'geolinks=geolinks:cli'
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
