@@ -3,11 +3,12 @@ Section: python
 Priority: optional
 Maintainer: Tom Kralidis <tomkralidis@gmail.com>
 Uploaders: Angelos Tzotsos <gcpp.kalxas@gmail.com>
-Build-Depends: debhelper (>= 9),
+           Johan Van de Wauw <johan@vandewauw.be>
+Build-Depends: debhelper-compat (= 12),
                dh-python,
                python3-all,
                python3-setuptools
-Standards-Version: 4.3.0
+Standards-Version: 4.6.1
 Vcs-Git: https://github.com/geopython/geolinks.git
 Homepage: https://github.com/geopython/geolinks
 
