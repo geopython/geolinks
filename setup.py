@@ -30,10 +30,10 @@
 import io
 import os
 import re
-from setuptools import Command, find_packages, setup
 import sys
 
 from geolinks import __version__ as version
+from setuptools import Command, find_packages, setup
 
 
 class PyTest(Command):
