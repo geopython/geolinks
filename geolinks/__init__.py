@@ -2,7 +2,7 @@
 #
 # Authors: Tom Kralidis <tomkralidis@gmail.com>
 #
-# Copyright (c) 2022 Tom Kralidis
+# Copyright (c) 2023 Tom Kralidis
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -35,7 +35,7 @@ import click
 
 LOGGER = logging.getLogger(__name__)
 
-__version__ = '0.2.dev0'
+__version__ = '0.2.1'
 
 
 def CLICK_OPTION_VERBOSITY(f):

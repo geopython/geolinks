@@ -83,6 +83,14 @@ pip install -r requirements-dev.txt
 ## Releasing
 
 ```bash
+vi geolinks/__init__.py
+git commit -m 'update release version' geolinks/__init__.py
+vi debian/changelog  # add changelog entry and summary of updates
+# push changes
+git push origin master
+git tag -a x.y.z -m 'tagging release x.y.z'
+# push tag
+git push --tags
 rm -fr build dist *.egg-info
 python setup.py sdist bdist_wheel --universal
 twine upload dist/*
