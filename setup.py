@@ -103,5 +103,7 @@ setup(
         'Topic :: Scientific/Engineering :: GIS',
     ],
     cmdclass={'test': PyTest},
-    test_suite='tests.run_tests'
+    test_suite='tests.run_tests',
+    install_requires=["click"],
+    python_requires=">=3.5",
 )
