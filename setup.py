@@ -70,6 +70,8 @@ def get_package_version():
 
 LONG_DESCRIPTION = read('README.md')
 
+INSTALL_REQUIRES = read('requirements.txt')
+
 
 setup(
     name='geolinks',
@@ -103,5 +105,6 @@ setup(
         'Topic :: Scientific/Engineering :: GIS',
     ],
     cmdclass={'test': PyTest},
-    test_suite='tests.run_tests'
+    test_suite='tests.run_tests',
+    install_requires=INSTALL_REQUIRES
 )
