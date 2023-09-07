@@ -1,3 +1,9 @@
+geolinks (0.2.2) focal; urgency=medium
+
+  * packaging fixes
+
+ -- Tom Kralidis <tomkralidis@gmail.com>  Thu, 7 Sep 2023 00:52:43 +0000
+
 geolinks (0.2.1) focal; urgency=medium
 
   * housekeeping release update
