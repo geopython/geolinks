@@ -32,7 +32,6 @@ import os
 import re
 import sys
 
-from geolinks import __version__ as version
 from setuptools import Command, find_packages, setup
 
 
@@ -73,7 +72,7 @@ LONG_DESCRIPTION = read('README.md')
 
 setup(
     name='geolinks',
-    version=version,
+    version=get_package_version(),
     description='Utilities to deal with geospatial links',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
@@ -85,6 +84,7 @@ setup(
     maintainer='Tom Kralidis',
     maintainer_email='tomkralidis@gmail.com',
     url='https://github.com/geopython/geolinks',
+    install_requires=read('requirements.txt').splitlines(),
     packages=find_packages(),
     entry_points={
         'console_scripts': [
