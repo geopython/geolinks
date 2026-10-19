@@ -1,3 +1,44 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=46.4", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "geolinks"
+version = "0.2.dev0"
+description = "Utilities to deal with geospatial links"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+keywords = ["links", "geo", "protocol", "url", "href"]
+authors = [
+    {name = "Tom Kralidis", email = "tomkralidis@gmail.com"}
+]
+maintainers = [
+    {name = "Tom Kralidis", email = "tomkralidis@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: GIS"
+]
+dependencies = [
+    "click"
+]
+
+[project.optional-dependencies]
+dev = ["flake8"]
+release = ["build", "twine", "wheel"]
+
+[project.scripts]
+geolinks = "geolinks:cli"
+
+[project.urls]
+homepage = "https://github.com/geopython/geolinks"
+source = "https://github.com/geopython/geolinks"
+documentation = "https://github.com/geopython/geolinks"
+issues = "https://github.com/geopython/geolinks/issues"
