@@ -4,31 +4,29 @@ on: [ push, pull_request ]
 
 jobs:
   main:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: ["3.12"]
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@master
+    - uses: actions/setup-python@v6
       name: Setup Python ${{ matrix.python-version }}
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install system dependencies 📦
-      run: sudo apt-get install -y dh-python devscripts fakeroot debhelper python3-all python3-setuptools
-    - name: Install requirements 📦
+      run: sudo apt-get install -y build-essential dh-python devscripts fakeroot debhelper pybuild-plugin-pyproject python3-all python3-setuptools
+    - name: Install package and dev requirements 📦
       run: |
-        python3 -m pip install --upgrade pip
-        pip3 install -r requirements.txt
-        pip3 install -r requirements-dev.txt
-    - name: Install package 📦
-      run: python3 setup.py install
+        pip3 install .
+        pip3 install ".[dev]"
+        pip3 install ".[release]"
     - name: run tests ⚙️
-      run: python3 setup.py test
+      run: python3 tests/run_tests.py
     - name: run flake8 ⚙️
       run: flake8
     - name: build Python package 🏗️
-      run: python3 setup.py sdist bdist_wheel --universal
+      run: python3 -m build
     - name: build Debian package 🏗️
       run: sudo debuild -b -uc -us
 

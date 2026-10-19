@@ -7,34 +7,23 @@ of the Cat-Interop work at https://github.com/OSGeo/Cat-Interop
 
 ## Installation
 
-geolinks is best installed and used within a Python virtualenv.
+### pip
 
-### Requirements
+Install latest stable version from [PyPI](https://pypi.org/project/geolinks)
 
-* Python 3 and above
-* Python [virtualenv](https://virtualenv.pypa.io/) package
-
-### Dependencies
-
-Dependencies are listed in [requirements.txt](requirements.txt). Dependencies
-are automatically installed during geolinks's installation.
-
-### Installing the Package
-
-from source:
 ```bash
-python3 -m venv my-env
-cd my-env
+pip3 install geolinks
+```
+
+### From source
+
+```bash
+python3 -m venv geolinks
+cd geolinks
 . bin/activate
 git clone https://github.com/geopython/geolinks.git
 cd geolinks
-python3 setup.py build
-python3 setup.py install
-```
-
-via pip:
-```bash
-pip3 install geolinks
+pip3 install .
 ```
 
 ## Running
@@ -62,38 +51,42 @@ geolinks link sniff 'http://host/wms?service=WMS'
 ### Running Tests
 
 ```bash
-# via setuptools
-python3 setup.py test
-# manually
-cd tests
-python3 run_tests.py
+python3 tests/run_tests.py
 ```
 
 ## Development
 
-### Setting up a Development Environment
-
-Same as installing a package.  Use a virtualenv.  Also install developer
-requirements:
-
 ```bash
-pip3 install -r requirements-dev.txt
+python3 -m venv geolinks
+cd geolinks
+source bin/activate
+git clone https://github.com/geopython/geolinks.git
+cd geolinks
+pip3 install .
+pip3 install ".[dev]"
 ```
 
 ## Releasing
 
 ```bash
-vi geolinks/__init__.py
-git commit -m 'update release version' geolinks/__init__.py
-vi debian/changelog  # add changelog entry and summary of updates
-# push changes
+# create release (x.y.z is the release version)
+vi pyproject.toml  # update [project]/version
+git commit -am 'update release version x.y.z'
 git push origin master
-git tag -a x.y.z -m 'tagging release x.y.z'
-# push tag
+git tag -a x.y.z -m 'tagging release version x.y.z'
 git push --tags
+
+# upload to PyPI
 rm -fr build dist *.egg-info
-python3 setup.py sdist bdist_wheel --universal
+python3 -m build
 twine upload dist/*
+
+# publish release on GitHub (https://github.com/geopython/geolinks/releases/new)
+
+# bump version back to dev
+vi pyproject.toml  # update [project]/version
+git commit -am 'back to dev'
+git push origin master
 ```
 
 ### Code Conventions
